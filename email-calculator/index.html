@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Inbox Revenue Loss Calculator — State of Missed Email Revenue 2026 | Sift Savvy</title>
+  <meta name="description" content="How much revenue is hiding in your inbox right now? Calculate your loss from slow responses, buried leads, and unanswered inquiries. Free. No sign-up." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../styles.css" />
+  <style>
+    .stat-callout {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: .75rem;
+      margin-bottom: 2rem;
+    }
+    .sc-chip {
+      background: rgba(255,255,255,.12);
+      border: 1px solid rgba(255,255,255,.2);
+      border-radius: var(--radius-lg);
+      padding: .875rem 1.125rem;
+    }
+    .sc-chip .sc-val { font-size: 1.5rem; font-weight: 900; color: #fbbf24; line-height: 1; }
+    .sc-chip .sc-lbl { font-size: .75rem; color: rgba(255,255,255,.7); margin-top: .25rem; }
+    .sc-chip .sc-src { font-size: .65rem; color: rgba(255,255,255,.4); margin-top: .2rem; font-style: italic; }
+
+    .breakdown-legend {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: .75rem;
+      font-size: .78rem;
+    }
+    .breakdown-legend span {
+      display: flex;
+      align-items: center;
+      gap: .35rem;
+      color: var(--neutral-600);
+    }
+    .breakdown-legend .dot {
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .recovery-box {
+      background: linear-gradient(135deg, #f0fdf4, #dcfce7);
+      border: 2px solid #86efac;
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+    }
+    .recovery-box .rb-label { font-size: .7rem; font-weight: 800; text-transform: uppercase; letter-spacing: .1em; color: #166534; margin-bottom: .5rem; }
+    .recovery-box .rb-val { font-size: 2rem; font-weight: 900; color: #166534; line-height: 1; margin-bottom: .375rem; }
+    .recovery-box .rb-sub { font-size: .825rem; color: #166534; }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <div class="container">
+      <a href="../index.html" class="navbar-brand">⚡ Sift<span>Savvy</span></a>
+      <ul class="navbar-links">
+        <li><a href="../index.html#findings">Research</a></li>
+        <li><a href="../index.html#how-it-works">How It Works</a></li>
+        <li><a href="../roi-calculator/index.html">Audit ROI Calculator</a></li>
+        <li><a href="../index.html#faq">FAQ</a></li>
+        <li><a href="mailto:mark@siftsavvy.com" class="navbar-cta">Request Audit →</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <header class="hero" style="padding:3.5rem 0 2.5rem;">
+    <div class="container">
+      <a href="../index.html" class="back-link">← Back to Report</a>
+      <div class="hero-badge">📉 Inbox Revenue Loss Calculator · Real-Time · No Sign-Up</div>
+      <h1>What Is Your Inbox<br>Costing You?</h1>
+      <p class="hero-sub" style="max-width:640px;">
+        Leads go unanswered. Follow-ups stall. Opportunities get buried under noise.
+        Adjust the sliders to match your situation and see your exact monthly and
+        annual revenue loss — based on verified 2026 research data.
+      </p>
+
+      <!-- Verified stats that power the calculator -->
+      <div class="stat-callout">
+        <div class="sc-chip">
+          <div class="sc-val">700%</div>
+          <div class="sc-lbl">Better success rate responding within 1 hour</div>
+          <div class="sc-src">EmailAnalytics + Harvard Business Review</div>
+        </div>
+        <div class="sc-chip">
+          <div class="sc-val">35–50%</div>
+          <div class="sc-lbl">Of sales go to the first person who responds</div>
+          <div class="sc-src">EmailAnalytics, 2026</div>
+        </div>
+        <div class="sc-chip">
+          <div class="sc-val">64.6%</div>
+          <div class="sc-lbl">Of businesses report email problems hurt revenue</div>
+          <div class="sc-src">EMARKETER, 2025</div>
+        </div>
+      </div>
+      <div class="insight-strip">
+        <span class="insight-chip blue">⚡ Results update as you type</span>
+        <span class="insight-chip green">🔒 No data stored or shared</span>
+        <span class="insight-chip orange">📊 Powered by verified 2026 research</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- CALCULATOR ENGINE -->
+  <section style="padding:2rem 0 4rem;">
+    <div class="container">
+      <div class="calc-engine">
+
+        <!-- ===== INPUT PANEL ===== -->
+        <div class="input-panel">
+          <h3>📥 Your Inbox Situation</h3>
+
+          <!-- Monthly lead emails -->
+          <div class="field-group">
+            <div class="field-label">
+              <label for="s-leads">Inbound lead emails per month</label>
+              <span class="bench">Potential business enquiries</span>
+            </div>
+            <div class="field-input-row">
+              <input type="range" id="s-leads" min="5" max="500" step="5" value="60"
+                     oninput="syncNum('s-leads','n-leads');calc()">
+              <input type="number" id="n-leads" min="1" max="99999" step="5" value="60"
+                     oninput="syncRange('n-leads','s-leads');calc()">
+            </div>
+            <div class="field-hint">Rough count of emails per month that could contain a business opportunity (inquiries, quotes, follow-ups, referrals).</div>
+          </div>
+
+          <!-- Fast reply % -->
+          <div class="field-group">
+            <div class="field-label">
+              <label for="s-fast">% you reply to within 1 hour</label>
+              <span class="bench">Research says &lt;1hr = 8× success</span>
+            </div>
+            <div class="field-input-row">
+              <input type="range" id="s-fast" min="0" max="100" step="1" value="30"
+                     oninput="syncNum('s-fast','n-fast');calc()">
+              <input type="number" id="n-fast" min="0" max="100" step="1" value="30"
+                     oninput="syncRange('n-fast','s-fast');calc()">
+            </div>
+            <div class="field-hint">Be honest. Most solopreneurs reply to 20–40% of leads within the first hour. Replies after 24 hours have dramatically lower close rates.</div>
+          </div>
+
+          <!-- Average deal value -->
+          <div class="field-group">
+            <div class="field-label">
+              <label for="s-deal">Average deal / project value ($)</label>
+              <span class="bench">Per client or transaction</span>
+            </div>
+            <div class="field-input-row">
+              <input type="range" id="s-deal" min="50" max="10000" step="50" value="1500"
+                     oninput="syncNum('s-deal','n-deal');calc()">
+              <input type="number" id="n-deal" min="1" max="999999" step="50" value="1500"
+                     oninput="syncRange('n-deal','s-deal');calc()">
+            </div>
+            <div class="field-hint">Your typical project, retainer, or product value per new client.</div>
+          </div>
+
+          <!-- Close rate -->
+          <div class="field-group">
+            <div class="field-label">
+              <label for="s-close">Email-to-close rate (%)</label>
+              <span class="bench">Your close rate on warm leads</span>
+            </div>
+            <div class="field-input-row">
+              <input type="range" id="s-close" min="1" max="60" step="1" value="20"
+                     oninput="syncNum('s-close','n-close');calc()">
+              <input type="number" id="n-close" min="1" max="100" step="1" value="20"
+                     oninput="syncRange('n-close','s-close');calc()">
+            </div>
+            <div class="field-hint">Out of 10 warm inbound leads you reply to, how many become paying clients? 15–25% is typical for solopreneurs with good offers.</div>
+          </div>
+
+          <!-- Buried opportunity estimate -->
+          <div class="field-group">
+            <div class="field-label">
+              <label for="s-buried">% of emails with buried opportunities</label>
+              <span class="bench">Aged, forgotten, or missed entirely</span>
+            </div>
+            <div class="field-input-row">
+              <input type="range" id="s-buried" min="0" max="30" step="1" value="12"
+                     oninput="syncNum('s-buried','n-buried');calc()">
+              <input type="number" id="n-buried" min="0" max="100" step="1" value="12"
+                     oninput="syncRange('n-buried','s-buried');calc()">
+            </div>
+            <div class="field-hint">Sift Savvy's "Find Money You Missed" analysis shows an average of 10–15% of business inboxes contain aged opportunities still actionable after 30+ days.</div>
+          </div>
+
+          <!-- Google Sheets link -->
+          <div class="sheets-cta">
+            <span class="sheets-icon">📊</span>
+            <div class="sheets-text">
+              <strong>Want a shareable spreadsheet?</strong>
+              <span>Make a copy of the Google Sheet version to save, print, or share with a partner.</span>
+            </div>
+            <a href="https://docs.google.com/spreadsheets/d/REPLACE-WITH-YOUR-SHEET-ID/copy"
+               target="_blank" rel="noopener" class="btn btn-sm btn-blue">Make a Copy →</a>
+          </div>
+        </div><!-- /input-panel -->
+
+        <!-- ===== RESULTS PANEL ===== -->
+        <div class="results-panel">
+
+          <!-- Annual missed revenue — headline -->
+          <div class="result-hero">
+            <div class="eyebrow">ESTIMATED ANNUAL INBOX REVENUE LOSS</div>
+            <div class="big-number danger" id="r-annual">$0</div>
+            <div class="big-label">per year in revenue your inbox is losing</div>
+            <div class="sub-number">
+              Monthly loss: <strong id="r-monthly">$0</strong>
+              &nbsp;·&nbsp;
+              Recoverable: <strong id="r-recoverable" style="color:#86efac;">$0</strong>/yr
+            </div>
+          </div>
+
+          <!-- Two-part breakdown -->
+          <div class="metric-row">
+            <h4>Revenue loss breakdown (monthly)</h4>
+            <div class="breakdown-legend">
+              <span><span class="dot" style="background:#ef4444;"></span>Slow-response drag</span>
+              <span><span class="dot" style="background:#f97316;"></span>Buried / missed leads</span>
+            </div>
+            <div class="metric-compare">
+              <div class="metric-item">
+                <div class="val yours" id="r-slow-loss" style="color:#ef4444;">$0</div>
+                <div class="lbl">Lost to slow/no reply</div>
+              </div>
+              <div class="metric-item">
+                <div class="val bench" id="r-buried-loss" style="color:#f97316;">$0</div>
+                <div class="lbl">Buried / missed leads</div>
+              </div>
+            </div>
+            <!-- Slow response gauge -->
+            <div class="gauge-wrap" style="margin-top:.75rem;">
+              <div class="gauge-label">
+                <span>Slow-response drag (% of total loss)</span>
+                <span id="r-slow-pct-lbl">0%</span>
+              </div>
+              <div class="gauge-track">
+                <div class="gauge-fill red" id="r-slow-bar" style="width:0%;"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- What the 700% stat means for you -->
+          <div class="metric-row">
+            <h4>The 1-hour response gap for your numbers</h4>
+            <div class="metric-compare">
+              <div class="metric-item">
+                <div class="val" id="r-fast-rev" style="color:var(--success);">$0</div>
+                <div class="lbl">Revenue if you reply to <strong>all</strong> leads within 1hr</div>
+              </div>
+              <div class="metric-item">
+                <div class="val" id="r-curr-rev" style="color:var(--primary);">$0</div>
+                <div class="lbl">Your current estimated monthly revenue</div>
+              </div>
+            </div>
+            <div class="gauge-wrap">
+              <div class="gauge-label">
+                <span>Current vs potential (1-hr-reply scenario)</span>
+                <span id="r-gap-pct-lbl">0% of potential</span>
+              </div>
+              <div class="gauge-track">
+                <div class="gauge-fill" id="r-curr-bar" style="width:0%;"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Recoverable revenue (what audit could find) -->
+          <div class="recovery-box">
+            <div class="rb-label">🛡 Estimated recoverable revenue (annual)</div>
+            <div class="rb-val" id="r-recov-big">$0</div>
+            <div class="rb-sub" id="r-recov-sub">This is an estimate of what a Sift Savvy Inbox Revenue Recovery Audit could surface from your buried leads and aged opportunities.</div>
+          </div>
+
+          <!-- Diagnosis -->
+          <div class="diagnosis-card" id="r-diag-card">
+            <div class="d-label" id="r-diag-label">Your Biggest Opportunity</div>
+            <h4 id="r-diag-title">Analysing your inputs…</h4>
+            <ul id="r-diag-recs"></ul>
+          </div>
+
+        </div><!-- /results-panel -->
+      </div><!-- /calc-engine -->
+
+      <!-- CTA to audit ROI -->
+      <div style="text-align:center; margin-top:3rem; padding:2.5rem; background:linear-gradient(135deg,#1e3a8a,#1d4ed8); border-radius:var(--radius-xl); color:var(--white);">
+        <h3 style="color:var(--white); margin-bottom:.75rem;">See your annual loss number above?</h3>
+        <p style="color:rgba(255,255,255,.8); margin-bottom:1.5rem; max-width:500px; margin-left:auto; margin-right:auto;">
+          Now run the Audit ROI Calculator to see whether the $497 one-time audit
+          or the $99/month plan pays off for your specific numbers.
+        </p>
+        <div style="display:flex; gap:1rem; justify-content:center; flex-wrap:wrap;">
+          <a href="../roi-calculator/index.html" class="btn btn-primary btn-lg">📈 Calculate Audit ROI →</a>
+          <a href="mailto:mark@siftsavvy.com" class="btn btn-outline btn-lg">✉ Request Audit Directly</a>
+        </div>
+        <p style="font-size:.8rem; color:rgba(255,255,255,.5); margin-top:1rem;">
+          🛡 Sift Savvy guarantee: We find $2,000+ in opportunities or the audit is free.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div>
+          <div class="footer-brand">⚡ Sift<span>Savvy</span></div>
+          <p class="footer-copy">© 2026 Sift Savvy. Calculator uses verified data from EmailAnalytics, Harvard Business Review, and EMARKETER (2025–2026). Results are directional estimates.</p>
+        </div>
+        <ul class="footer-links">
+          <li><a href="../index.html">Report Home</a></li>
+          <li><a href="../roi-calculator/index.html">Audit ROI Calc</a></li>
+          <li><a href="../index.html#faq">FAQ</a></li>
+          <li><a href="mailto:mark@siftsavvy.com">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ====================================================
+       INBOX REVENUE LOSS CALCULATOR ENGINE
+       Research basis:
+       - Responding within 1 hour = 700% better success = 8× close rate
+         (EmailAnalytics + Harvard Business Review)
+       - 35–50% of sales go to first responder (EmailAnalytics 2026)
+       - 10–15% of inboxes contain buried aged opportunities (Sift Savvy data)
+       ==================================================== -->
+  <script>
+  function syncNum(r,n){ document.getElementById(n).value = document.getElementById(r).value; }
+  function syncRange(n,r){
+    var v = parseFloat(document.getElementById(n).value)||0;
+    var el = document.getElementById(r);
+    el.value = Math.min(Math.max(v, parseFloat(el.min)||0), parseFloat(el.max)||999999);
+  }
+  function fmtMoney(n){
+    if(n>=1000000) return '$'+(n/1000000).toFixed(2)+'M';
+    if(n>=10000)   return '$'+(n/1000).toFixed(1)+'K';
+    return '$'+Math.round(n).toLocaleString();
+  }
+  function clr(pct){ return pct>=80?'green':pct>=55?'yellow':pct>=30?'orange':'red'; }
+
+  function calc(){
+    var leads  = parseFloat(document.getElementById('n-leads').value)  || 0;
+    var fast   = parseFloat(document.getElementById('n-fast').value)   / 100 || 0;
+    var deal   = parseFloat(document.getElementById('n-deal').value)   || 0;
+    var close  = parseFloat(document.getElementById('n-close').value)  / 100 || 0;
+    var buried = parseFloat(document.getElementById('n-buried').value) / 100 || 0;
+
+    if(leads===0 || deal===0) return;
+
+    /* ---- Core calculation ----
+       Research: responding within 1 hour = 700% better chance of qualifying a lead.
+       This means fast responders' close rate is 8× that of slow/no-response.
+       Fast close rate = close (user input = their ACTUAL current rate on leads they do reply to).
+       Slow close rate = close / 8 (scientific conservative: "8× better" means slow = 1/8th).
+       We also apply the 35–50% first-responder advantage: use 42.5% midpoint as probability
+       that the first responder wins even among all respondents.
+    */
+    var FAST_MULTIPLIER = 8;  // 700% better = 8× (1 + 7 = 8)
+    var slowClose = close / FAST_MULTIPLIER;
+
+    // Monthly revenue if ALL leads were replied to within 1 hour
+    var fullRevMo = leads * close * deal;
+
+    // Current monthly revenue (mix of fast and slow replies)
+    var slow = 1 - fast;
+    var currRevMo = leads * ((fast * close) + (slow * slowClose)) * deal;
+
+    // Revenue drag from slow/no response
+    var slowLossMo = fullRevMo - currRevMo;
+
+    // Buried/aged opportunity revenue
+    var buriedLossMo = leads * buried * close * deal;
+
+    // Total monthly loss
+    var totalLossMo = slowLossMo + buriedLossMo;
+    var totalLossYr = totalLossMo * 12;
+
+    // Recoverable revenue (audit can surface ~70% of buried + improve response awareness)
+    var recoverableYr = (buriedLossMo * 0.8 + slowLossMo * 0.25) * 12;
+
+    // % of total that is slow-response
+    var slowPct = totalLossMo > 0 ? (slowLossMo / totalLossMo) * 100 : 50;
+
+    // Current revenue as % of full potential
+    var currPct = fullRevMo > 0 ? (currRevMo / fullRevMo) * 100 : 0;
+
+    /* ---- Diagnosis ---- */
+    var diagCard, diagLabel, diagTitle, recs;
+    if(fast < 0.25){
+      diagCard  = 'danger';
+      diagLabel = '🚨 Critical Gap — Response Speed';
+      diagTitle = 'Slow response time is your biggest revenue leak';
+      recs = [
+        'The Harvard Business Review research is direct: leads contacted within 1 hour are 7× more likely to qualify. A dedicated "reply within 1 hour" habit for business email is worth tens of thousands of dollars annually at your numbers.',
+        'Set up a mobile notification for emails from unknown senders. Even a 2-line holding reply ("Got this, sending you details shortly") dramatically improves close rates over no reply.',
+        'Consider the Sift Savvy audit — we surface every urgent lead with a 1–10 urgency score so you never miss a time-sensitive opportunity again.',
+      ];
+    } else if(buried > 0.10){
+      diagCard  = 'warning';
+      diagLabel = '⚠️ Significant Gap — Buried Leads';
+      diagTitle = 'Aged and buried opportunities are quietly draining revenue';
+      recs = [
+        '"Find Money You Missed" is one of Sift Savvy\'s most-used features for good reason: our analysis shows that 10–15% of typical business inboxes contain emails older than 30 days that still have actionable, recoverable opportunities.',
+        'Set a weekly 20-minute "inbox archaeology" session — search for subject lines containing "proposal", "quote", "interested", "following up" and filter by 30+ days old.',
+        'A Sift Savvy audit auto-tags every email meeting this criteria, scored by urgency, so you spend 0 minutes on search and 20 minutes on outreach instead.',
+      ];
+    } else if(close < 0.15){
+      diagCard  = 'warning';
+      diagLabel = '⚠️ Opportunity — Close Rate';
+      diagTitle = 'Your response rate is good — but closing is the gap';
+      recs = [
+        'A close rate below 15% on inbound leads typically signals a proposal, follow-up, or pricing clarity issue — not a lead quality issue. You\'re getting the right people; the process is losing them.',
+        'Audit your last 10 lost leads: did they go cold after the first reply? After seeing pricing? After a proposal? The answer tells you exactly where to add a follow-up touchpoint.',
+        'The Sift Savvy audit surfaces every stalled follow-up — proposals you sent that never got a yes or no — so you can re-engage with context and timing.',
+      ];
+    } else {
+      diagCard  = 'success';
+      diagLabel = '✅ Solid Foundation — Scale Your Volume';
+      diagTitle = 'Your response speed and close rate are healthy — focus on inbound volume';
+      recs = [
+        'Your metrics are in healthy territory. The highest-leverage next move is increasing the volume of qualified inbound leads so your existing process generates more revenue.',
+        'The most reliable way to increase inbound email leads for solopreneurs: one targeted piece of content per week that answers a specific question your ideal client is Googling.',
+        'Consider the monthly Sift Savvy monitoring plan ($99/month) to catch any new buried opportunities as your volume grows — so your current strong response habits scale without gaps.',
+      ];
+    }
+
+    /* ---- Update DOM ---- */
+    document.getElementById('r-annual').textContent    = fmtMoney(totalLossYr);
+    document.getElementById('r-monthly').textContent   = fmtMoney(totalLossMo);
+    document.getElementById('r-recoverable').textContent = fmtMoney(recoverableYr);
+    document.getElementById('r-slow-loss').textContent  = fmtMoney(slowLossMo);
+    document.getElementById('r-buried-loss').textContent = fmtMoney(buriedLossMo);
+    document.getElementById('r-slow-pct-lbl').textContent = Math.round(slowPct)+'%';
+    document.getElementById('r-slow-bar').style.width  = Math.min(slowPct,100)+'%';
+    document.getElementById('r-fast-rev').textContent  = fmtMoney(fullRevMo);
+    document.getElementById('r-curr-rev').textContent  = fmtMoney(currRevMo);
+    document.getElementById('r-gap-pct-lbl').textContent = Math.round(currPct)+'% of potential';
+    var cb = document.getElementById('r-curr-bar');
+    cb.style.width = Math.min(currPct,100)+'%';
+    cb.className   = 'gauge-fill '+clr(currPct);
+    document.getElementById('r-recov-big').textContent = fmtMoney(recoverableYr);
+    document.getElementById('r-recov-sub').textContent =
+      'Based on Sift Savvy\'s analysis: ~80% of buried lead revenue and ~25% of slow-response revenue is recoverable through proactive outreach. At your numbers, an audit could surface up to '+fmtMoney(recoverableYr)+' per year.';
+    document.getElementById('r-diag-card').className  = 'diagnosis-card '+diagCard;
+    document.getElementById('r-diag-label').textContent = diagLabel;
+    document.getElementById('r-diag-title').textContent = diagTitle;
+    document.getElementById('r-diag-recs').innerHTML   = recs.map(r=>'<li>'+r+'</li>').join('');
+  }
+
+  window.addEventListener('DOMContentLoaded', calc);
+  </script>
+</body>
+</html>

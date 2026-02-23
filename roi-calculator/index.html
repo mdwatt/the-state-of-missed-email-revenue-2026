@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Audit ROI Calculator — Is the Sift Savvy Inbox Audit Worth It? | 2026</title>
+  <meta name="description" content="Calculate the exact ROI of a Sift Savvy Inbox Revenue Recovery Audit for your business. Compare the $497 one-time and $99/month plans. Payback period included." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../styles.css" />
+  <style>
+    .plan-compare {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-top: 1.25rem;
+    }
+    @media (max-width:480px){ .plan-compare { grid-template-columns: 1fr; } }
+    .plan-card {
+      border-radius: var(--radius-lg);
+      padding: 1.25rem;
+      border: 2px solid;
+      text-align: center;
+    }
+    .plan-card.one-time { border-color: var(--neutral-300); background: var(--neutral-50); }
+    .plan-card.monthly  { border-color: var(--primary); background: var(--primary-light); }
+    .plan-card .pc-name { font-size: .7rem; font-weight: 800; text-transform: uppercase; letter-spacing: .1em; color: var(--neutral-500); margin-bottom: .375rem; }
+    .plan-card.monthly .pc-name { color: var(--primary); }
+    .plan-card .pc-roi  { font-size: 1.75rem; font-weight: 900; line-height: 1; margin-bottom: .25rem; }
+    .plan-card.one-time .pc-roi { color: var(--neutral-900); }
+    .plan-card.monthly  .pc-roi { color: var(--primary-dark); }
+    .plan-card .pc-pay  { font-size: .8rem; color: var(--neutral-500); }
+    .plan-card.monthly  .pc-pay { color: var(--primary); }
+
+    .guarantee-strip {
+      background: linear-gradient(135deg, #f0fdf4, #dcfce7);
+      border: 2px solid #86efac;
+      border-radius: var(--radius-lg);
+      padding: 1.25rem 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .guarantee-strip .gs-icon { font-size: 2rem; flex-shrink: 0; }
+    .guarantee-strip .gs-text strong { display: block; color: #166534; margin-bottom: .2rem; }
+    .guarantee-strip .gs-text span { font-size: .85rem; color: #166534; }
+
+    .assumption-list { display: flex; flex-direction: column; gap: .4rem; font-size: .8rem; color: var(--neutral-600); margin-top: 1rem; }
+    .assumption-list li { display: flex; gap: .5rem; align-items: flex-start; }
+    .assumption-list li::before { content: '•'; flex-shrink: 0; color: var(--primary); font-weight: 900; }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <div class="container">
+      <a href="../index.html" class="navbar-brand">⚡ Sift<span>Savvy</span></a>
+      <ul class="navbar-links">
+        <li><a href="../index.html#findings">Research</a></li>
+        <li><a href="../index.html#pricing">Pricing</a></li>
+        <li><a href="../email-calculator/index.html">Revenue Loss Calc</a></li>
+        <li><a href="../index.html#faq">FAQ</a></li>
+        <li><a href="mailto:mark@siftsavvy.com" class="navbar-cta">Request Audit →</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <header class="hero" style="padding:3.5rem 0 2.5rem;">
+    <div class="container">
+      <a href="../index.html" class="back-link">← Back to Report</a>
+      <div class="hero-badge">📈 Audit ROI Calculator · $497 vs $99/mo · Real-Time</div>
+      <h1>Is the Sift Savvy<br>Inbox Audit Worth It?</h1>
+      <p class="hero-sub" style="max-width:620px;">
+        Enter your email volume, average deal value, and close rate.
+        The calculator shows your projected recovered revenue, ROI, and payback
+        period for both the one-time audit and the monthly plan — side by side.
+      </p>
+      <div class="insight-strip">
+        <span class="insight-chip blue">💡 Both plans calculated simultaneously</span>
+        <span class="insight-chip green">🛡 $2,000 guarantee factored in</span>
+        <span class="insight-chip orange">📊 Based on Sift Savvy recovery data</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- CALCULATOR -->
+  <section style="padding:2rem 0 4rem;">
+    <div class="container">
+
+      <!-- Guarantee strip -->
+      <div class="guarantee-strip" style="margin-bottom:2rem;">
+        <span class="gs-icon">🛡</span>
+        <div class="gs-text">
+          <strong>The $2,000 Guarantee is Built Into This Calculator</strong>
+          <span>If Sift Savvy doesn't find at least $2,000 in recoverable opportunities in your inbox, your audit is completely free. This calculator assumes the audit finds its minimum guarantee.</span>
+        </div>
+      </div>
+
+      <div class="calc-engine">
+
+        <!-- INPUT PANEL -->
+        <div class="input-panel">
+          <h3>💼 Your Business Numbers</h3>
+
+          <!-- Monthly inbound emails -->
+          <div class="field-group">
+            <div class="field-label">
+              <label for="s-vol">Monthly business email volume</label>
+              <span class="bench">Potential lead emails</span>
+            </div>
+            <div class="field-input-row">
+              <input type="range" id="s-vol" min="5" max="500" step="5" value="60"
+                     oninput="syncNum('s-vol','n-vol');roiCalc()">
+              <input type="number" id="n-vol" min="1" max="99999" step="5" value="60"
+                     oninput="syncRange('n-vol','s-vol');roiCalc()">
+            </div>
+            <div class="field-hint">Rough monthly count of emails that could contain a business opportunity.</div>
+          </div>
+
+          <!-- Average deal value -->
+          <div class="field-group">
+            <div class="field-label">
+              <label for="s-adv">Average deal / project value ($)</label>
+              <span class="bench">Per new client or transaction</span>
+            </div>
+            <div class="field-input-row">
+              <input type="range" id="s-adv" min="50" max="10000" step="50" value="1500"
+                     oninput="syncNum('s-adv','n-adv');roiCalc()">
+              <input type="number" id="n-adv" min="1" max="999999" step="50" value="1500"
+                     oninput="syncRange('n-adv','s-adv');roiCalc()">
+            </div>
+          </div>
+
+          <!-- Close rate -->
+          <div class="field-group">
+            <div class="field-label">
+              <label for="s-cr">Your close rate on recovered leads (%)</label>
+              <span class="bench">Warm / re-engaged leads</span>
+            </div>
+            <div class="field-input-row">
+              <input type="range" id="s-cr" min="1" max="60" step="1" value="15"
+                     oninput="syncNum('s-cr','n-cr');roiCalc()">
+              <input type="number" id="n-cr" min="1" max="100" step="1" value="15"
+                     oninput="syncRange('n-cr','s-cr');roiCalc()">
+            </div>
+            <div class="field-hint">When you re-engage a buried or previously cold lead with good context, what % convert? Typically 10–20% for warm outreach.</div>
+          </div>
+
+          <!-- Recovery rate -->
+          <div class="field-group">
+            <div class="field-label">
+              <label for="s-rec">Expected lead recovery rate (%)</label>
+              <span class="bench">% of buried leads surfaced by audit</span>
+            </div>
+            <div class="field-input-row">
+              <input type="range" id="s-rec" min="5" max="25" step="1" value="12"
+                     oninput="syncNum('s-rec','n-rec');roiCalc()">
+              <input type="number" id="n-rec" min="1" max="100" step="1" value="12"
+                     oninput="syncRange('n-rec','s-rec');roiCalc()">
+            </div>
+            <div class="field-hint">Based on Sift Savvy audits: typically 10–15% of business emails contain buried opportunities. Conservative default is 12%.</div>
+          </div>
+
+          <!-- Model assumptions -->
+          <div style="background:var(--neutral-50); border:1px solid var(--neutral-200); border-radius:var(--radius-md); padding:1rem 1.25rem; margin-top:.5rem;">
+            <p style="font-size:.78rem; font-weight:700; color:var(--neutral-700); margin-bottom:.5rem;">📋 Calculator assumptions</p>
+            <ul class="assumption-list">
+              <li>One-time audit: $497 flat fee, recovers leads from 30–90 days of email.</li>
+              <li>Monthly plan: $99/month ongoing, captures new buried leads each month.</li>
+              <li>Guarantee: $2,000 minimum recovery assumed (the audit is free if not met).</li>
+              <li>Monthly plan year-1 cost = $99 × 12 = $1,188.</li>
+              <li>Recovery calculation: volume × recovery rate × close rate × deal value.</li>
+            </ul>
+          </div>
+
+        </div><!-- /input-panel -->
+
+        <!-- RESULTS PANEL -->
+        <div class="results-panel">
+
+          <!-- Verdict -->
+          <div class="verdict-bar" id="roi-verdict">
+            <div class="v-icon" id="v-icon">📊</div>
+            <div class="v-title" id="v-title">Adjust the inputs to see your audit verdict</div>
+            <div class="v-sub"   id="v-sub">ROI and payback period for both plans will appear here.</div>
+          </div>
+
+          <!-- Estimated monthly recovered revenue -->
+          <div class="result-hero" style="padding:1.5rem;">
+            <div class="eyebrow">ESTIMATED MONTHLY RECOVERED REVENUE</div>
+            <div class="big-number" id="r-mo-rev">$0</div>
+            <div class="big-label">per month the audit unlocks in your inbox</div>
+            <div class="sub-number">
+              Annual recovered: <strong id="r-yr-rev">$0</strong>
+              &nbsp;·&nbsp;
+              Guarantee minimum: <strong style="color:#86efac;">$2,000</strong>
+            </div>
+          </div>
+
+          <!-- Side-by-side plan comparison -->
+          <div class="metric-row">
+            <h4>Plan comparison — both calculated for your numbers</h4>
+            <div class="plan-compare">
+              <div class="plan-card one-time">
+                <div class="pc-name">One-Time Audit · $497</div>
+                <div class="pc-roi" id="ot-roi">—</div>
+                <div class="pc-pay" id="ot-pay">—</div>
+              </div>
+              <div class="plan-card monthly">
+                <div class="pc-name">Monthly · $99/mo</div>
+                <div class="pc-roi" id="mo-roi">—</div>
+                <div class="pc-pay" id="mo-pay">—</div>
+              </div>
+            </div>
+            <p style="font-size:.78rem; color:var(--neutral-500); margin-top:.75rem;">
+              One-time ROI = (Annual recovered revenue − $497) ÷ $497 × 100.<br>
+              Monthly ROI = (Monthly recovered − $99) ÷ $99 × 100.
+            </p>
+          </div>
+
+          <!-- Breakdown table -->
+          <div class="monthly-breakdown">
+            <div class="breakdown-row">
+              <span class="br-label">Leads surfaced per month (estimated)</span>
+              <span class="br-val" id="br-leads">—</span>
+            </div>
+            <div class="breakdown-row">
+              <span class="br-label">Deals closed from audit leads (estimated)</span>
+              <span class="br-val" id="br-deals">—</span>
+            </div>
+            <div class="breakdown-row">
+              <span class="br-label">Monthly recovered revenue</span>
+              <span class="br-val" style="color:var(--success);" id="br-rev">—</span>
+            </div>
+            <div class="breakdown-row">
+              <span class="br-label">Monthly plan cost</span>
+              <span class="br-val" style="color:var(--danger);">−$99</span>
+            </div>
+            <div class="breakdown-row total">
+              <span class="br-label">Net monthly benefit (monthly plan)</span>
+              <span class="br-val" id="br-net">—</span>
+            </div>
+          </div>
+
+          <!-- Year 1 projection for each plan -->
+          <div class="roi-result-grid">
+            <div class="yr1-projection" style="border-radius:var(--radius-lg);">
+              <div class="yp-label">Year-1 Net · One-Time ($497)</div>
+              <div class="yp-val" id="ot-yr1">—</div>
+              <div class="yp-sub">Annual recovered minus $497</div>
+            </div>
+            <div class="yr1-projection" style="border-radius:var(--radius-lg); background:linear-gradient(135deg,#065f46,#059669);">
+              <div class="yp-label">Year-1 Net · Monthly ($99×12)</div>
+              <div class="yp-val" id="mo-yr1">—</div>
+              <div class="yp-sub">Annual recovered minus $1,188</div>
+            </div>
+          </div>
+
+          <!-- Recommendation -->
+          <div class="diagnosis-card" id="r-rec-card">
+            <div class="d-label" id="r-rec-label">Recommendation</div>
+            <h4 id="r-rec-title">Calculating…</h4>
+            <ul id="r-rec-list"></ul>
+          </div>
+
+        </div><!-- /results-panel -->
+      </div><!-- /calc-engine -->
+
+      <!-- CTA -->
+      <div style="text-align:center; margin-top:3rem; padding:2.5rem; background:var(--neutral-50); border:1px solid var(--neutral-200); border-radius:var(--radius-xl);">
+        <h3 style="margin-bottom:.75rem;">Not sure what your inbox revenue loss actually is yet?</h3>
+        <p style="margin-bottom:1.5rem; max-width:480px; margin-left:auto; margin-right:auto;">
+          Run the Inbox Revenue Loss Calculator first — it'll show you the annual number.
+          Then use that figure to pressure-test the ROI here.
+        </p>
+        <a href="../email-calculator/index.html" class="btn btn-primary btn-lg">← Calculate My Revenue Loss First</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div>
+          <div class="footer-brand">⚡ Sift<span>Savvy</span></div>
+          <p class="footer-copy">© 2026 Sift Savvy. Results are directional estimates. Actual recovery will vary by inbox, industry, and lead quality. Guarantee: $2,000 found or audit is free. <a href="mailto:mark@siftsavvy.com" style="color:#93c5fd;">mark@siftsavvy.com</a></p>
+        </div>
+        <ul class="footer-links">
+          <li><a href="../index.html">Report Home</a></li>
+          <li><a href="../email-calculator/index.html">Revenue Loss Calc</a></li>
+          <li><a href="../index.html#pricing">Pricing</a></li>
+          <li><a href="../index.html#faq">FAQ</a></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ====================================================
+       AUDIT ROI CALCULATOR ENGINE
+       Plans: One-time $497 | Monthly $99/mo
+       Guarantee: $2,000 minimum (audit free if not met)
+       ==================================================== -->
+  <script>
+  function syncNum(r,n){ document.getElementById(n).value = document.getElementById(r).value; }
+  function syncRange(n,r){
+    var v = parseFloat(document.getElementById(n).value)||0;
+    var el = document.getElementById(r);
+    el.value = Math.min(Math.max(v, parseFloat(el.min)||0), parseFloat(el.max)||999999);
+  }
+  function fmtMoney(n){
+    if(n>=1000000) return '$'+(n/1000000).toFixed(2)+'M';
+    if(n>=10000)   return '$'+(n/1000).toFixed(1)+'K';
+    return '$'+Math.round(n).toLocaleString();
+  }
+  function fmtPct(n,decimals){ return (n>=0?'+':'')+n.toFixed(decimals||0)+'%'; }
+
+  var OT_COST = 497;   // One-time audit
+  var MO_COST = 99;    // Monthly plan
+  var GUARANTEE = 2000;
+
+  function roiCalc(){
+    var vol   = parseFloat(document.getElementById('n-vol').value)  || 0;
+    var adv   = parseFloat(document.getElementById('n-adv').value)  || 0;
+    var cr    = parseFloat(document.getElementById('n-cr').value)   / 100 || 0;
+    var rec   = parseFloat(document.getElementById('n-rec').value)  / 100 || 0;
+
+    if(vol===0 || adv===0) return;
+
+    /* Monthly recovered revenue = leads surfaced × close rate × deal value */
+    var leadsPerMo  = vol * rec;
+    var dealsPerMo  = leadsPerMo * cr;
+    var recovMo     = Math.max(dealsPerMo * adv, GUARANTEE / 12); // floor at guarantee
+    var recovYr     = recovMo * 12;
+
+    /* One-time plan */
+    var otNet       = recovYr - OT_COST;
+    var otROI       = ((recovYr - OT_COST) / OT_COST) * 100;
+    var otPaybackMo = OT_COST / recovMo;
+
+    /* Monthly plan */
+    var moNet       = recovMo - MO_COST;
+    var moROI       = ((recovMo - MO_COST) / MO_COST) * 100;
+    var moPaybackDays = (MO_COST / recovMo) * 30;
+    var moYr1Net    = recovYr - (MO_COST * 12);
+
+    /* Payback text */
+    function pbText(months){
+      if(months < (1/30)) return 'Under 1 day';
+      if(months < 1) return Math.round(months*30)+' days';
+      if(months < 2) return '~'+months.toFixed(1)+' month';
+      return '~'+months.toFixed(1)+' months';
+    }
+
+    /* Verdict */
+    var vClass, vIcon, vTitle, vSub;
+    if(moROI > 300){
+      vClass='excellent'; vIcon='🚀';
+      vTitle='Exceptional ROI — the audit pays for itself almost immediately';
+      vSub='The monthly plan produces a return of '+fmtPct(moROI)+' per month. At your numbers, this is one of the highest-ROI investments available to your business.';
+    } else if(moROI > 100){
+      vClass='excellent'; vIcon='✅';
+      vTitle='Strong ROI — both plans are clear wins for your business';
+      vSub='The audit recoups its cost within the first month and generates net positive revenue from month two onwards.';
+    } else if(moROI > 25){
+      vClass='good'; vIcon='👍';
+      vTitle='Good ROI — worth the investment at your current numbers';
+      vSub='Positive returns with a short payback period. The one-time audit is the lower-risk entry point.';
+    } else if(moROI > 0){
+      vClass='slim'; vIcon='⚠️';
+      vTitle='Slim margin — but the guarantee protects you';
+      vSub='Remember: if Sift Savvy doesn\'t find $2,000 in opportunities, the audit is free. Your downside risk is effectively zero.';
+    } else {
+      vClass='good'; vIcon='🛡';
+      vTitle='Guarantee covers you — your risk is zero';
+      vSub='At your current numbers the recovery looks slim, but the $2,000 guarantee means you either profit or pay nothing. The one-time audit is the right starting point.';
+    }
+
+    /* Recommendation */
+    var recCard, recLabel, recTitle, recList;
+    if(recovMo > 500 && moROI > 100){
+      recCard='success'; recLabel='✅ Recommendation';
+      recTitle='Start with the monthly plan ($99/mo)';
+      recList=[
+        'At your volume, the monthly plan generates more annual revenue than the one-time audit — you capture new buried leads every month, not just from the last 90 days.',
+        'The payback period on the monthly plan is '+pbText(moPaybackDays/30)+'. From month two, it\'s pure margin.',
+        'Start with one month. If the first report doesn\'t impress you, cancel with one click — no fees, no friction.',
+      ];
+    } else if(otROI > 100){
+      recCard='success'; recLabel='✅ Recommendation';
+      recTitle='Start with the one-time audit ($497)';
+      recList=[
+        'The one-time audit ROI is '+fmtPct(otROI)+'%. At your numbers, a single scan of 30–90 days of email returns significantly more than the audit cost.',
+        'Use the one-time audit to see exactly what\'s in your inbox. Many clients upgrade to monthly after seeing the first report.',
+        'Remember: if we don\'t find $2,000+ in opportunities, the audit is completely free.',
+      ];
+    } else {
+      recCard='warning'; recLabel='💡 Recommendation';
+      recTitle='The guarantee makes the one-time audit risk-free — start there';
+      recList=[
+        'Your current numbers show a slim projected margin, but the $2,000 guarantee means there is no downside: either we find real money or you pay nothing.',
+        'The one-time audit at $497 is the ideal test. Real inboxes consistently outperform projections because buried opportunities are by definition undercounted.',
+        'Email mark@siftsavvy.com with questions before committing. We\'ll give you an honest assessment based on your actual business context.',
+      ];
+    }
+
+    /* ---- Update DOM ---- */
+    var vEl = document.getElementById('roi-verdict');
+    vEl.className = 'verdict-bar '+vClass;
+    document.getElementById('v-icon').textContent  = vIcon;
+    document.getElementById('v-title').textContent = vTitle;
+    document.getElementById('v-sub').textContent   = vSub;
+
+    document.getElementById('r-mo-rev').textContent = fmtMoney(recovMo);
+    document.getElementById('r-yr-rev').textContent = fmtMoney(recovYr);
+
+    document.getElementById('ot-roi').textContent  = fmtPct(otROI)+'&nbsp;ROI';
+    document.getElementById('ot-roi').innerHTML    = fmtPct(otROI)+' ROI (annual)';
+    document.getElementById('ot-pay').textContent  = 'Payback: '+pbText(otPaybackMo);
+    document.getElementById('mo-roi').innerHTML    = fmtPct(moROI)+' ROI (monthly)';
+    document.getElementById('mo-pay').textContent  = 'Payback: '+pbText(moPaybackDays/30);
+
+    document.getElementById('br-leads').textContent = Math.round(leadsPerMo)+' leads/mo';
+    document.getElementById('br-deals').textContent = dealsPerMo.toFixed(1)+' deals/mo';
+    document.getElementById('br-rev').textContent   = fmtMoney(recovMo);
+    document.getElementById('br-net').textContent   = fmtMoney(moNet);
+
+    document.getElementById('ot-yr1').textContent = fmtMoney(otNet);
+    document.getElementById('mo-yr1').textContent = fmtMoney(moYr1Net);
+
+    document.getElementById('r-rec-card').className  = 'diagnosis-card '+recCard;
+    document.getElementById('r-rec-label').textContent = recLabel;
+    document.getElementById('r-rec-title').textContent = recTitle;
+    document.getElementById('r-rec-list').innerHTML   = recList.map(r=>'<li>'+r+'</li>').join('');
+  }
+
+  window.addEventListener('DOMContentLoaded', roiCalc);
+  </script>
+</body>
+</html>

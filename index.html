@@ -1,0 +1,980 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The State of Missed Email Revenue 2026 | Sift Savvy</title>
+  <meta name="description" content="Every day, leads vanish inside your inbox — unread, buried, forgotten. See the verified data behind the revenue loss and calculate exactly what it's costing you." />
+  <meta property="og:title"       content="The State of Missed Email Revenue 2026 | Sift Savvy" />
+  <meta property="og:description" content="Verified research: 64.6% of businesses say email problems directly hurt revenue. Free calculators show your exact loss." />
+  <meta property="og:type"        content="website" />
+  <meta property="og:image"       content="https://YOUR-USERNAME.github.io/sift-savvy-google-sheet-calculator/og-image.png" />
+  <meta property="og:url"         content="https://YOUR-USERNAME.github.io/sift-savvy-google-sheet-calculator/" />
+  <meta name="twitter:card"       content="summary_large_image" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="canonical" href="https://YOUR-USERNAME.github.io/sift-savvy-google-sheet-calculator/" />
+
+  <style>
+    /* ---- Pricing table ---- */
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+    .pricing-card {
+      background: var(--white);
+      border: 2px solid var(--neutral-200);
+      border-radius: var(--radius-xl);
+      padding: 2rem;
+      text-align: center;
+      box-shadow: var(--shadow-sm);
+      transition: box-shadow .2s, transform .2s;
+      display: flex;
+      flex-direction: column;
+    }
+    .pricing-card:hover { box-shadow: var(--shadow-xl); transform: translateY(-3px); }
+    .pricing-card.featured {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 4px rgba(26,86,219,.1), var(--shadow-lg);
+    }
+    .pricing-card .pc-badge {
+      display: inline-block;
+      background: var(--primary);
+      color: var(--white);
+      font-size: .7rem;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      padding: .25rem .75rem;
+      border-radius: var(--radius-full);
+      margin-bottom: 1rem;
+    }
+    .pricing-card .pc-plan { font-size: .8rem; font-weight: 600; color: var(--neutral-500); text-transform: uppercase; letter-spacing: .08em; margin-bottom: .5rem; }
+    .pricing-card .pc-price { font-size: 3rem; font-weight: 900; color: var(--neutral-900); line-height: 1; margin-bottom: .25rem; }
+    .pricing-card .pc-price sup { font-size: 1.25rem; vertical-align: super; }
+    .pricing-card .pc-cycle { font-size: .85rem; color: var(--neutral-500); margin-bottom: 1.25rem; }
+    .pricing-card .pc-desc { font-size: .9rem; color: var(--neutral-700); margin-bottom: 1.5rem; line-height: 1.6; flex: 1; }
+    .pricing-card .pc-guarantee {
+      background: #f0fdf4;
+      border: 1px solid #bbf7d0;
+      border-radius: var(--radius-md);
+      padding: .75rem;
+      font-size: .8rem;
+      color: #166534;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+    }
+
+    /* ---- Feature comparison table ---- */
+    .comp-table { width: 100%; border-collapse: collapse; font-size: .85rem; }
+    .comp-table th { background: var(--neutral-900); color: var(--white); padding: .75rem 1rem; text-align: center; font-size: .75rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; }
+    .comp-table th:first-child { text-align: left; }
+    .comp-table td { padding: .65rem 1rem; border-bottom: 1px solid var(--neutral-100); vertical-align: middle; }
+    .comp-table td:not(:first-child) { text-align: center; font-size: 1rem; }
+    .comp-table tr:nth-child(even) td { background: var(--neutral-50); }
+    .comp-table tr:last-child td { border-bottom: none; }
+    .comp-table .ss-col { background: rgba(26,86,219,.06); font-weight: 700; }
+    .comp-table .check  { color: #22c55e; }
+    .comp-table .cross  { color: #ef4444; }
+    .comp-table .partial { color: #f59e0b; }
+
+    /* ---- How it works steps ---- */
+    .steps { display: flex; flex-direction: column; gap: 0; max-width: 640px; margin: 0 auto; }
+    .step {
+      display: flex;
+      gap: 1.5rem;
+      align-items: flex-start;
+      padding-bottom: 2rem;
+      position: relative;
+    }
+    .step:not(:last-child)::before {
+      content: '';
+      position: absolute;
+      left: 20px;
+      top: 44px;
+      bottom: 0;
+      width: 2px;
+      background: var(--neutral-200);
+    }
+    .step-num {
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      background: var(--primary);
+      color: var(--white);
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 900; font-size: 1rem;
+      flex-shrink: 0;
+      position: relative;
+      z-index: 1;
+      box-shadow: 0 0 0 4px var(--primary-light);
+    }
+    .step-body h4 { margin-bottom: .375rem; }
+    .step-body p  { font-size: .9rem; color: var(--neutral-600); }
+
+    /* ---- Source citation ---- */
+    .source-cite {
+      font-size: .75rem;
+      color: var(--neutral-500);
+      margin-top: .5rem;
+      font-style: italic;
+    }
+    .source-cite a { color: var(--neutral-500); text-decoration: underline dotted; }
+    .source-cite a:hover { color: var(--primary); }
+
+    /* ---- Guarantee banner ---- */
+    .guarantee-banner {
+      background: linear-gradient(135deg, #f0fdf4, #dcfce7);
+      border: 2px solid #86efac;
+      border-radius: var(--radius-xl);
+      padding: 2.5rem;
+      text-align: center;
+    }
+    .guarantee-banner .g-icon { font-size: 3rem; margin-bottom: 1rem; }
+    .guarantee-banner h3 { color: #166534; margin-bottom: .75rem; font-size: 1.5rem; }
+    .guarantee-banner p { color: #166534; max-width: 520px; margin: 0 auto 1.5rem; font-size: 1rem; }
+
+    /* ---- Research citations list ---- */
+    .citations { list-style: none; display: flex; flex-direction: column; gap: .75rem; margin-top: 1.5rem; }
+    .citations li {
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+      padding: .875rem 1.25rem;
+      background: var(--white);
+      border: 1px solid var(--neutral-200);
+      border-radius: var(--radius-md);
+      font-size: .875rem;
+    }
+    .citations li .c-stat { font-weight: 800; color: var(--primary); font-size: 1.1rem; flex-shrink: 0; min-width: 120px; }
+    .citations li .c-body .c-source { font-size: .75rem; color: var(--neutral-500); margin-top: .2rem; }
+  </style>
+</head>
+<body>
+
+  <!-- ==================== NAVBAR ==================== -->
+  <nav class="navbar" aria-label="Main navigation">
+    <div class="container">
+      <a href="#" class="navbar-brand">⚡ Sift<span>Savvy</span></a>
+      <ul class="navbar-links">
+        <li><a href="#findings">Research</a></li>
+        <li><a href="#calculators">Calculators</a></li>
+        <li><a href="#how-it-works">How It Works</a></li>
+        <li><a href="#pricing">Pricing</a></li>
+        <li><a href="#faq">FAQ</a></li>
+        <li><a href="mailto:mark@siftsavvy.com" class="navbar-cta">Request Audit →</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- ==================== HERO ==================== -->
+  <header class="hero">
+    <div class="container">
+      <div class="hero-badge">📊 The State of Missed Email Revenue 2026 · Verified Research · Free Calculators</div>
+
+      <h1>Every Day, Revenue<br><em>Disappears in Your Inbox.</em></h1>
+
+      <p class="hero-sub">
+        Thousands of sales conversations, quotes, and follow-ups vanish inside
+        business inboxes — unread, forgotten, or buried under noise.
+        For solopreneurs and small agencies, this isn't an inconvenience.
+        <strong style="color:#fbbf24;">It's a direct, measurable drain on revenue.</strong>
+        This report quantifies exactly what it's costing you.
+      </p>
+
+      <div class="hero-actions">
+        <a href="#calculators" class="btn btn-primary btn-lg">🧮 Calculate My Revenue Loss</a>
+        <a href="#findings"    class="btn btn-outline btn-lg">📈 See the Research</a>
+      </div>
+
+      <!-- Verified stats from the PDFs -->
+      <div class="hero-stats">
+        <div>
+          <div class="hero-stat-value">$36</div>
+          <div class="hero-stat-label">ROI for every $1 spent on email — when you actually capture every opportunity</div>
+        </div>
+        <div>
+          <div class="hero-stat-value">700%</div>
+          <div class="hero-stat-label">Better chance of qualifying a lead when you respond within 1 hour vs. later</div>
+        </div>
+        <div>
+          <div class="hero-stat-value">35–50%</div>
+          <div class="hero-stat-label">Of sales go to the first business that responds — not the best pitch, the fastest reply</div>
+        </div>
+        <div>
+          <div class="hero-stat-value">64.6%</div>
+          <div class="hero-stat-label">Of businesses report that email problems directly hurt their revenue in 2025</div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ==================== KEY RESEARCH FINDINGS ==================== -->
+  <section id="findings">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label">Verified Research · 2025–2026</span>
+        <h2>The Data Behind the Revenue Loss</h2>
+        <p>
+          Every statistic below is sourced, verified, and cited.
+          <em>The State of Missed Email Revenue 2026</em> compiles research from
+          Harvard Business Review, Kickbox, Validity, EMARKETER, and industry
+          benchmarks to quantify the true cost of inbox chaos.
+        </p>
+      </div>
+
+      <!-- 8 verified finding cards from the PDF -->
+      <div class="findings-grid">
+
+        <div class="finding-card">
+          <div class="finding-number">64.6%</div>
+          <h4>Email Problems Directly Hurt Revenue</h4>
+          <p>Nearly two-thirds of businesses say spam filters, poor list hygiene, and
+          deliverability failures are actively costing them money — not just
+          causing inconvenience.</p>
+          <div class="source-cite">EMARKETER, 2025 — "Spam filters, poor list hygiene are killing email marketing campaign engagement"</div>
+        </div>
+
+        <div class="finding-card accent">
+          <div class="finding-number">35–50%</div>
+          <h4>Sales Go to the First Responder</h4>
+          <p>Between a third and half of all won deals go to the business that responded
+          first — not the one with the best proposal or lowest price.
+          Speed of reply is a primary competitive differentiator.</p>
+          <div class="source-cite">EmailAnalytics — "37 Email Statistics that Matter to Sales Professionals in 2026"</div>
+        </div>
+
+        <div class="finding-card success">
+          <div class="finding-number">700%</div>
+          <h4>Better Odds from a 1-Hour Response</h4>
+          <p>Responding to a lead within one hour creates a 700% higher probability
+          of qualifying that lead compared to responding even one hour later.
+          Every minute of delay costs real deals.</p>
+          <div class="source-cite">EmailAnalytics + Harvard Business Review — "The Short Life of Online Sales Leads"</div>
+        </div>
+
+        <div class="finding-card warning">
+          <div class="finding-number">3.4%</div>
+          <h4>Cold Email Reply Rate — 8.4% with Personalisation</h4>
+          <p>The average cold outbound email earns a 3.4% reply rate. Personalised
+          outreach earns 8.4%. Most businesses leave 2.5× more replies — and deals —
+          on the table by sending generic messages.</p>
+          <div class="source-cite">Woodpecker 2026 Benchmark Report — "Cold Email Outreach in 2026: How to Get 3x More Replies"</div>
+        </div>
+
+        <div class="finding-card">
+          <div class="finding-number">9%</div>
+          <h4>Webform Leads Are Invalid Before You See Them</h4>
+          <p>One in eleven inbound leads from web forms is invalid — bad address, bot
+          submission, or typo — before it ever reaches your inbox.
+          Without validation, you're chasing phantoms.</p>
+          <div class="source-cite">Kickbox 2025 Survey via MediaPost — "Inroads Into The Inbox: Most Firms Have Been Hurt By Poor Deliverability"</div>
+        </div>
+
+        <div class="finding-card accent">
+          <div class="finding-number">$15K+</div>
+          <h4>Lost Per Million Emails to Deliverability Issues</h4>
+          <p>For every million emails sent, poor deliverability — spam folder placement,
+          throttling, and domain reputation issues — silently destroys at least
+          $15,000 in potential revenue.</p>
+          <div class="source-cite">Validity, 2025 — "State of Email Live: Deliverability Data Deep Dive with Al Iverson"</div>
+        </div>
+
+        <div class="finding-card success">
+          <div class="finding-number">2 in 3</div>
+          <h4>Businesses Say Deliverability Is Killing Revenue</h4>
+          <p>Two-thirds of businesses explicitly report that email deliverability
+          problems — not strategy, not copy, not targeting — are their single
+          biggest barrier to email-driven growth.</p>
+          <div class="source-cite">EMARKETER, 2025 — "Spam filters, poor list hygiene are killing email marketing campaign engagement"</div>
+        </div>
+
+        <div class="finding-card warning">
+          <div class="finding-number">$36:$1</div>
+          <h4>Email ROI — When Every Lead Is Captured</h4>
+          <p>Email marketing delivers a $36 return for every $1 invested —
+          making it the highest-ROI channel in digital marketing.
+          The catch: that number assumes you're capturing every lead that lands.</p>
+          <div class="source-cite">Multiple Sources, 2026 — "40 Essential Digital Marketing Stats for Smarter Campaigns in 2026"</div>
+        </div>
+
+      </div><!-- /findings-grid -->
+
+      <!-- Expert commentary -->
+      <div class="commentary" style="margin-top:3rem;">
+        <div class="tag">🔍 Founder's Analysis · Sift Savvy</div>
+        <blockquote>
+          "Every day, thousands of sales conversations, quotes, and opportunities
+          disappear inside business inboxes — unread, forgotten, or buried under noise.
+          For solopreneurs and small agencies, this isn't just an inconvenience; it's a
+          direct drain on revenue. The research is unambiguous: the businesses winning
+          on email are not necessarily the best marketers — they're the ones who
+          capture and respond to every lead that arrives."
+        </blockquote>
+        <div class="attribution">— Mark, Founder, Sift Savvy &nbsp;·&nbsp; <a href="mailto:mark@siftsavvy.com" style="color:inherit;">mark@siftsavvy.com</a></div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==================== CALCULATORS ==================== -->
+  <section id="calculators" class="calculators-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label">Free Calculators</span>
+        <h2>What Is Your Inbox Costing You?</h2>
+        <p>
+          Two interactive calculators. Enter your numbers and see your exact
+          revenue loss and audit ROI in real time. No email required.
+        </p>
+      </div>
+
+      <div class="calc-cards">
+
+        <div class="calc-card">
+          <div class="calc-card-icon red">📉</div>
+          <h3>Inbox Revenue Loss Calculator</h3>
+          <p>
+            How much revenue are you losing because leads go unanswered, replies
+            are slow, or opportunities get buried? Enter your monthly email volume,
+            response speed, and deal value. See your monthly and annual loss — and
+            how much of it is recoverable.
+          </p>
+          <ul class="features">
+            <li>Based on verified "700% faster reply" and "35–50% first-responder" data</li>
+            <li>Calculates slow-response revenue drag in real time</li>
+            <li>Estimates buried opportunity revenue (the "Find Money You Missed" gap)</li>
+            <li>Shows exactly how much an audit could recover</li>
+          </ul>
+          <a href="email-calculator/index.html" class="btn btn-primary">📉 Calculate My Revenue Loss →</a>
+        </div>
+
+        <div class="calc-card">
+          <div class="calc-card-icon blue">📈</div>
+          <h3>Audit ROI Calculator</h3>
+          <p>
+            Is the Sift Savvy Inbox Revenue Recovery Audit worth the investment
+            for your business? Enter your email volume, average deal value, and
+            close rate. See your projected recovered revenue, audit ROI, and
+            payback period for both the $497 one-time and $99/month plans.
+          </p>
+          <ul class="features">
+            <li>Pre-loaded with the $497 one-time and $99/month plan pricing</li>
+            <li>Shows recovered revenue, net ROI %, and payback period</li>
+            <li>Compares both plans side-by-side</li>
+            <li>Sift Savvy guarantee: $2,000 found or the audit is free</li>
+          </ul>
+          <a href="roi-calculator/index.html" class="btn btn-blue">📈 Calculate My Audit ROI →</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== HOW IT WORKS ==================== -->
+  <section id="how-it-works">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label">How It Works</span>
+        <h2>Inbox Revenue Recovery in 4 Steps</h2>
+        <p>
+          Sift Savvy provides Inbox Revenue Recovery as a <strong>RaaS — Results-as-a-Service</strong> model.
+          We guarantee $2,000 in found opportunities or your audit is free.
+        </p>
+      </div>
+
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:4rem; align-items:start;">
+        <div class="steps">
+          <div class="step">
+            <div class="step-num">1</div>
+            <div class="step-body">
+              <h4>Request Your Audit</h4>
+              <p>Click "Request Audit" on our site. Choose between the Done-For-You
+              one-time audit ($497) or ongoing monthly monitoring ($99/month).</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">2</div>
+            <div class="step-body">
+              <h4>Export Your Email</h4>
+              <p>Export a .txt file of your last 30–90 days of business email
+              (any provider works — Gmail, Outlook, or any IMAP inbox). Each
+              email should be separated by a line of dashes (<code>------</code>).
+              Or grant temporary read-only access if you prefer.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">3</div>
+            <div class="step-body">
+              <h4>We Scan and Score Every Lead</h4>
+              <p>Sift Savvy's proprietary intelligence engine extracts every contact,
+              scores each lead for urgency and intent (1–10 scale), and identifies
+              aged inquiries via the "Find Money You Missed" feature.
+              Business vs. personal detection runs at 80%+ accuracy.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">4</div>
+            <div class="step-body">
+              <h4>Receive Your Revenue Report</h4>
+              <p>Within 48 hours, you get a detailed report with every missed
+              opportunity flagged by urgency, contact details and LinkedIn profiles,
+              estimated revenue left on the table, and plain-English explanations
+              of why each lead mattered.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- What's in the report -->
+        <div>
+          <h3 style="margin-bottom:1.25rem;">What the audit uncovers</h3>
+          <div style="display:flex; flex-direction:column; gap:.75rem;">
+            <div class="finding-card" style="padding:1.25rem;">
+              <h4 style="font-size:.95rem; margin-bottom:.35rem;">🔴 Urgent Leads You Never Replied To</h4>
+              <p style="font-size:.85rem;">Time-sensitive enquiries that arrived, got buried under noise, and went cold — often worth the most.</p>
+            </div>
+            <div class="finding-card" style="padding:1.25rem;">
+              <h4 style="font-size:.95rem; margin-bottom:.35rem;">🟡 Stalled Follow-Ups That Went Cold</h4>
+              <p style="font-size:.85rem;">Conversations you started but never finished. Prospects still waiting for a response they never got.</p>
+            </div>
+            <div class="finding-card" style="padding:1.25rem;">
+              <h4 style="font-size:.95rem; margin-bottom:.35rem;">🟢 "Find Money You Missed" — Aged Opportunities</h4>
+              <p style="font-size:.85rem;">Emails older than 30 days that still contain active, recoverable business opportunities. Auto-tagged.</p>
+            </div>
+            <div class="finding-card" style="padding:1.25rem;">
+              <h4 style="font-size:.95rem; margin-bottom:.35rem;">📊 CRM-Ready Export</h4>
+              <p style="font-size:.85rem;">Clean CSV, Excel, Salesforce, HubSpot, or Pipedrive formats. Your leads go straight into your workflow.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== AUDIT FEATURES ==================== -->
+  <section style="background:var(--neutral-50);">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label">Audit Features</span>
+        <h2>Everything Included in Every Audit</h2>
+        <p>No black boxes. No surprises. Here's exactly what Sift Savvy's intelligence engine does with your inbox data.</p>
+      </div>
+
+      <div class="findings-grid">
+        <div class="finding-card success" style="padding:1.5rem;">
+          <h4>Full Inbox Audit Scan</h4>
+          <p style="font-size:.875rem;">Processes months of email (30–90 days recommended) to uncover every potential lead. No email is skipped.</p>
+        </div>
+        <div class="finding-card" style="padding:1.5rem;">
+          <h4>Urgent Lead Qualifier</h4>
+          <p style="font-size:.875rem;">Built-in contextual scoring goes beyond simple keyword matching — it understands intent, urgency language, and buying signals.</p>
+        </div>
+        <div class="finding-card accent" style="padding:1.5rem;">
+          <h4>Urgency Scoring + Visual Badge</h4>
+          <p style="font-size:.875rem;">Every lead is scored 1–10 with a red badge for time-sensitive opportunities. You always know what to action first.</p>
+        </div>
+        <div class="finding-card" style="padding:1.5rem;">
+          <h4>Transparent Reasoning Tags</h4>
+          <p style="font-size:.875rem;">"Bubbles" with logic tags show exactly why each lead was selected. No black box — you can verify every decision.</p>
+        </div>
+        <div class="finding-card success" style="padding:1.5rem;">
+          <h4>LinkedIn Profile Auto-Extraction</h4>
+          <p style="font-size:.875rem;">Automatically finds and validates LinkedIn URLs from email signatures. Every lead arrives with full contact context.</p>
+        </div>
+        <div class="finding-card accent" style="padding:1.5rem;">
+          <h4>Smishing &amp; Phishing Protection</h4>
+          <p style="font-size:.875rem;">Advanced threat detection filters out security risks before they reach your report. You only see real business opportunities.</p>
+        </div>
+        <div class="finding-card" style="padding:1.5rem;">
+          <h4>Business vs Personal Detection</h4>
+          <p style="font-size:.875rem;">80%+ accuracy separating legitimate business inquiries from personal emails and noise. Your report contains signal, not clutter.</p>
+        </div>
+        <div class="finding-card success" style="padding:1.5rem;">
+          <h4>"Find Money You Missed" — Aged Lead Recovery</h4>
+          <p style="font-size:.875rem;">Auto-tags emails older than 30 days that still contain active opportunities. Recover deals you'd completely forgotten about.</p>
+        </div>
+        <div class="finding-card accent" style="padding:1.5rem;">
+          <h4>Multi-CRM Export (5 Formats)</h4>
+          <p style="font-size:.875rem;">CSV, Excel (.xlsx), Salesforce, HubSpot, and Pipedrive — all pre-mapped so your leads go straight into your workflow.</p>
+        </div>
+      </div>
+
+      <!-- Commentary -->
+      <div class="commentary" style="margin-top:3rem; border-left-color:var(--success); background:linear-gradient(135deg,#f0fdf4,#dcfce7);">
+        <div class="tag" style="color:var(--success);">📊 Why Speed + Completeness Both Matter</div>
+        <blockquote>
+          "Most inbox management tools find leads. What they don't do is score them for urgency, explain
+          their reasoning, and automatically surface the ones you buried six weeks ago. The '700% better
+          success rate' statistic is compelling — but it assumes you <em>find</em> the lead in the first
+          place. The 'Find Money You Missed' feature exists because our data showed that a significant
+          portion of the highest-value opportunities in any inbox are over 30 days old and still actionable."
+        </blockquote>
+        <div class="attribution">— Sift Savvy Product Team &nbsp;·&nbsp; <a href="mailto:support@siftsavvy.com" style="color:inherit;">support@siftsavvy.com</a></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== COMPETITIVE COMPARISON ==================== -->
+  <section>
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label">Competitive Snapshot · Verified Feb 23, 2026</span>
+        <h2>How Sift Savvy Compares</h2>
+        <p>Features may have changed. This snapshot was verified February 23, 2026.
+        SS = Sift Savvy, MP = Mailparser.io, PR = Parseur, NN = Nanonets, ZB = Zapier/Bardeen.</p>
+      </div>
+
+      <div style="overflow-x:auto;">
+        <table class="comp-table">
+          <thead>
+            <tr>
+              <th style="width:40%;"># Feature</th>
+              <th class="ss-col">SS</th>
+              <th>MP</th>
+              <th>PR</th>
+              <th>NN</th>
+              <th>ZB</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>1. AI lead qualification</td><td class="ss-col check">✓</td><td class="cross">✗</td><td class="partial">△</td><td class="check">✓</td><td class="cross">✗</td></tr>
+            <tr><td>2. Urgency scoring (badge)</td><td class="ss-col check">✓</td><td class="cross">✗</td><td class="cross">✗</td><td class="cross">✗</td><td class="cross">✗</td></tr>
+            <tr><td>3. Business / personal detection</td><td class="ss-col check">✓</td><td class="partial">△</td><td class="partial">△</td><td class="partial">△</td><td class="cross">✗</td></tr>
+            <tr><td>4. LinkedIn auto-extraction</td><td class="ss-col check">✓</td><td class="cross">✗</td><td class="cross">✗</td><td class="cross">✗</td><td class="cross">✗</td></tr>
+            <tr><td>5. Phishing / smishing protection</td><td class="ss-col check">✓</td><td class="cross">✗</td><td class="cross">✗</td><td class="partial">△</td><td class="cross">✗</td></tr>
+            <tr><td>6. Zapier integration</td><td class="ss-col check">✓</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td></tr>
+            <tr><td>7. Reasoning transparency tags</td><td class="ss-col check">✓</td><td class="cross">✗</td><td class="cross">✗</td><td class="cross">✗</td><td class="cross">✗</td></tr>
+            <tr><td>8. Email body processing</td><td class="ss-col check">✓</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td><td class="partial">△</td></tr>
+            <tr><td>9. Done-For-You service</td><td class="ss-col check">✓</td><td class="cross">✗</td><td class="cross">✗</td><td class="cross">✗</td><td class="cross">✗</td></tr>
+            <tr><td>10. Multi-CRM export (5 formats)</td><td class="ss-col check">✓</td><td class="partial">△</td><td class="partial">△</td><td class="partial">△</td><td class="partial">△</td></tr>
+            <tr><td>11. Aged-lead recovery ("Find Money You Missed")</td><td class="ss-col check">✓</td><td class="cross">✗</td><td class="cross">✗</td><td class="cross">✗</td><td class="cross">✗</td></tr>
+            <tr><td>12. Lead validity filtering</td><td class="ss-col check">✓</td><td class="partial">△</td><td class="partial">△</td><td class="cross">✗</td><td class="cross">✗</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p style="font-size:.78rem; color:var(--neutral-500); margin-top:.75rem;">
+        ✓ = Yes / Differentiated &nbsp;·&nbsp; △ = Partial / Limited &nbsp;·&nbsp; ✗ = No / Not advertised.
+        Pricing fit for: Solopreneurs, Small Business Owners, Freelancers, Marketers, Recruiters &amp; Entrepreneurs.
+      </p>
+    </div>
+  </section>
+
+  <!-- ==================== PRICING ==================== -->
+  <section id="pricing" style="background:var(--neutral-50);">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label">Pricing</span>
+        <h2>Two Ways to Stop Losing Revenue</h2>
+        <p>No hidden fees. Cancel the monthly plan anytime. Both plans include the $2,000 guarantee.</p>
+      </div>
+
+      <div class="pricing-grid">
+
+        <div class="pricing-card">
+          <div class="pc-plan">One-Time Audit</div>
+          <div class="pc-price"><sup>$</sup>497</div>
+          <div class="pc-cycle">single payment · delivered within 48 hours</div>
+          <div class="pc-desc">
+            A single, deep-dive scan of your last 30–90 days of business email.
+            Perfect if you want to see exactly what's been buried before committing
+            to ongoing monitoring.
+          </div>
+          <div class="pc-guarantee">🛡 Guarantee: We find $2,000+ in opportunities or it's free.</div>
+          <ul class="features" style="text-align:left; margin-bottom:1.5rem;">
+            <li>Full inbox audit scan (30–90 days)</li>
+            <li>Every lead scored 1–10 for urgency</li>
+            <li>LinkedIn profiles auto-extracted</li>
+            <li>Aged lead recovery included</li>
+            <li>CRM-ready export (5 formats)</li>
+            <li>48-hour delivery</li>
+          </ul>
+          <a href="mailto:mark@siftsavvy.com?subject=One-Time Audit Request"
+             class="btn btn-outline" style="color:var(--primary); border-color:var(--primary);">
+            Request One-Time Audit →
+          </a>
+        </div>
+
+        <div class="pricing-card featured">
+          <div class="pc-badge">Most Popular</div>
+          <div class="pc-plan">Monthly Monitoring</div>
+          <div class="pc-price"><sup>$</sup>99</div>
+          <div class="pc-cycle">per month · cancel anytime</div>
+          <div class="pc-desc">
+            We watch your inbox every month so you never miss another deal.
+            Monthly reports delivered automatically. Priority support included.
+            Cancel anytime — no early-termination fees.
+          </div>
+          <div class="pc-guarantee">🛡 Guarantee applies every month. No lead left behind.</div>
+          <ul class="features" style="text-align:left; margin-bottom:1.5rem;">
+            <li>Everything in the one-time audit</li>
+            <li>Monthly automated monitoring</li>
+            <li>Priority support (same-day replies)</li>
+            <li>Ongoing aged-lead recovery</li>
+            <li>Cancel from dashboard with one click</li>
+            <li>Billing via secure Stripe link</li>
+          </ul>
+          <a href="mailto:mark@siftsavvy.com?subject=Monthly Monitoring Request"
+             class="btn btn-blue">
+            Start Monthly Monitoring →
+          </a>
+        </div>
+
+      </div>
+
+      <!-- Guarantee banner -->
+      <div class="guarantee-banner" style="margin-top:2.5rem;">
+        <div class="g-icon">🛡</div>
+        <h3>The $2,000 Guarantee</h3>
+        <p>
+          If Sift Savvy doesn't find at least <strong>$2,000 in recoverable opportunities</strong>
+          in your inbox, the audit is completely free. No questions asked.
+          We put our money where our methodology is.
+        </p>
+        <a href="mailto:mark@siftsavvy.com" class="btn btn-blue btn-lg">Request Your Audit →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== FAQ ==================== -->
+  <section id="faq">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label">FAQ</span>
+        <h2>Frequently Asked Questions</h2>
+        <p>For additional questions, reach out to
+          <a href="mailto:mark@siftsavvy.com">mark@siftsavvy.com</a> (Founder) or
+          <a href="mailto:support@siftsavvy.com">support@siftsavvy.com</a> (Support).
+        </p>
+      </div>
+
+      <div class="faq-list">
+
+        <!-- GENERAL -->
+        <p style="font-size:.7rem; font-weight:800; letter-spacing:.12em; text-transform:uppercase; color:var(--neutral-500); margin-bottom:.75rem; margin-top:2rem;">General</p>
+
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            What is an Inbox Revenue Recovery Audit?
+            <span class="arrow">▾</span>
+          </button>
+          <div class="faq-answer">
+            An <strong>Inbox Revenue Recovery Audit</strong> is a deep scan of your business
+            email designed to find:
+            <ul style="margin:.75rem 0 0 1.5rem;">
+              <li style="margin-bottom:.4rem;">Urgent leads you never replied to</li>
+              <li style="margin-bottom:.4rem;">Stalled follow-ups that went cold</li>
+              <li style="margin-bottom:.4rem;">Missed opportunities buried under newsletters and spam</li>
+              <li>Aged inquiries still waiting for a response — the <em style="color:var(--accent);">"Find Money You Missed"</em> category</li>
+            </ul>
+            <p style="margin-top:.75rem;">Using Sift Savvy's proprietary intelligence engine, we extract every contact,
+            score each lead for urgency and intent, and deliver a clear report showing
+            exactly what revenue is hiding in your inbox — and how to claim it.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            How do I get started?
+            <span class="arrow">▾</span>
+          </button>
+          <div class="faq-answer">
+            <ol style="margin:.5rem 0 0 1.5rem;">
+              <li style="margin-bottom:.6rem;">Email <a href="mailto:mark@siftsavvy.com">mark@siftsavvy.com</a> or click "Request Audit" to begin.</li>
+              <li style="margin-bottom:.6rem;">
+                Export a <strong>.txt file</strong> of your last 30–90 days of email
+                (<strong>any provider works</strong>) — as long as each email is separated by
+                a line of dashes (<code>------</code>). Gmail: drag to desktop. Outlook: save as .txt.
+              </li>
+              <li style="margin-bottom:.6rem;">Upload the file, or grant temporary read-only access if you prefer.</li>
+              <li>
+                Within <strong>48 hours</strong> you receive a detailed report with:
+                <ul style="margin:.5rem 0 0 1.25rem;">
+                  <li>Every missed opportunity, flagged by urgency</li>
+                  <li>Contact details, LinkedIn profiles, and company info</li>
+                  <li>Estimated revenue left on the table</li>
+                  <li>Plain-English explanations of why each lead mattered</li>
+                </ul>
+              </li>
+            </ol>
+            <p style="margin-top:.75rem; font-weight:600; color:var(--success);">
+              🛡 If we don't find at least $2,000 in recoverable opportunities, the audit is free.
+            </p>
+          </div>
+        </div>
+
+        <!-- KEY FEATURES -->
+        <p style="font-size:.7rem; font-weight:800; letter-spacing:.12em; text-transform:uppercase; color:var(--neutral-500); margin-bottom:.75rem; margin-top:2rem;">Key Features</p>
+
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            What features does the audit include?
+            <span class="arrow">▾</span>
+          </button>
+          <div class="faq-answer">
+            <ul style="margin:.5rem 0 0 1.5rem;">
+              <li style="margin-bottom:.5rem;"><strong>Full Inbox Audit Scan</strong> — Processes months of email (30–90 days recommended) to uncover every potential lead.</li>
+              <li style="margin-bottom:.5rem;"><strong>Urgent Lead Qualifier</strong> — Built-in contextual scoring that goes beyond simple keyword matching.</li>
+              <li style="margin-bottom:.5rem;"><strong>Urgency Scoring + Visual Badge</strong> — 1–10 scale with red badge for time-sensitive opportunities.</li>
+              <li style="margin-bottom:.5rem;"><strong>Transparent Reasoning</strong> — "Bubbles" with logic tags show why each lead was selected. No black box.</li>
+              <li style="margin-bottom:.5rem;"><strong>LinkedIn Profile Auto-Extraction</strong> — Automatically finds and validates LinkedIn URLs from signatures.</li>
+              <li style="margin-bottom:.5rem;"><strong>Smishing &amp; Phishing Protection</strong> — Advanced threat detection filters out security risks.</li>
+              <li style="margin-bottom:.5rem;"><strong>Business vs Personal Detection</strong> — 80%+ accuracy separating legitimate inquiries from noise.</li>
+              <li style="margin-bottom:.5rem;"><strong>Lead Validity Filtering</strong> — Removes low-signal junk so you only see real opportunities.</li>
+              <li style="margin-bottom:.5rem;"><strong>"Find Money You Missed"</strong> — Auto-tags emails older than 30 days that still contain active opportunities.</li>
+              <li><strong>CRM-Ready Export</strong> — Clean CSV, Excel, Salesforce, HubSpot, or Pipedrive formats.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            How does Sift Savvy differ from competitors like Mailparser, Parseur, or Nanonets?
+            <span class="arrow">▾</span>
+          </button>
+          <div class="faq-answer">
+            Most competitors are parsing tools — they extract structured data from email.
+            Sift Savvy is an intelligence layer built specifically for <strong>revenue recovery</strong>.
+            The key differentiators are features no competitor currently offers:
+            <ul style="margin:.75rem 0 0 1.5rem;">
+              <li style="margin-bottom:.5rem;"><strong>Urgency scoring with visual badges</strong> — only Sift Savvy</li>
+              <li style="margin-bottom:.5rem;"><strong>LinkedIn auto-extraction</strong> — only Sift Savvy</li>
+              <li style="margin-bottom:.5rem;"><strong>Transparent reasoning tags</strong> — only Sift Savvy</li>
+              <li style="margin-bottom:.5rem;"><strong>Aged-lead recovery ("Find Money You Missed")</strong> — only Sift Savvy</li>
+              <li><strong>Done-For-You service</strong> — only Sift Savvy. All competitors are self-serve only.</li>
+            </ul>
+            <p style="margin-top:.75rem;">
+              Pricing: <strong>$497 one-time audit</strong> or <strong>$99/month</strong> for ongoing monitoring.
+              Fit for solopreneurs, small business owners, freelancers, marketers, recruiters, and entrepreneurs.
+            </p>
+          </div>
+        </div>
+
+        <!-- INTEGRATIONS -->
+        <p style="font-size:.7rem; font-weight:800; letter-spacing:.12em; text-transform:uppercase; color:var(--neutral-500); margin-bottom:.75rem; margin-top:2rem;">Integrations</p>
+
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            Can I integrate Sift Savvy with my CRM or other tools?
+            <span class="arrow">▾</span>
+          </button>
+          <div class="faq-answer">
+            Yes. Your final report can be exported to five formats:
+            <ul style="margin:.5rem 0 .75rem 1.5rem;">
+              <li style="margin-bottom:.35rem;"><strong>CSV</strong> — Universal format, works with anything</li>
+              <li style="margin-bottom:.35rem;"><strong>Excel (.xlsx)</strong> — Formatted spreadsheet, ready to share</li>
+              <li style="margin-bottom:.35rem;"><strong>Salesforce-ready CSV</strong> — Pre-mapped fields</li>
+              <li style="margin-bottom:.35rem;"><strong>HubSpot-ready CSV</strong> — Lifecycle stage included</li>
+              <li><strong>Pipedrive-ready CSV</strong> — Deal value and person fields</li>
+            </ul>
+            If you use Zapier, you can also connect Sift Savvy to thousands of apps for
+            automated lead import — with the intelligence layer intact, something competitors lack.
+          </div>
+        </div>
+
+        <!-- TECHNICAL -->
+        <p style="font-size:.7rem; font-weight:800; letter-spacing:.12em; text-transform:uppercase; color:var(--neutral-500); margin-bottom:.75rem; margin-top:2rem;">Technical Questions</p>
+
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            What are the system requirements? What email providers work?
+            <span class="arrow">▾</span>
+          </button>
+          <div class="faq-answer">
+            <ul style="margin:.5rem 0 0 1.5rem;">
+              <li style="margin-bottom:.5rem;">
+                <strong>For a one-time audit:</strong> A .txt export of your emails (any provider).
+                Each email separated by a line of dashes (<code>------</code>).
+                We recommend 30–90 days of email history.
+              </li>
+              <li style="margin-bottom:.5rem;">
+                <strong>For monthly monitoring:</strong> A read-only connection to your inbox
+                (IMAP or secure API).
+              </li>
+              <li>
+                <strong>File capacity:</strong> Up to 50 emails per file for optimal speed.
+                If you have more, create multiple files or export a shorter date range.
+              </li>
+            </ul>
+            <p style="margin-top:.75rem;">No special hardware or software needed. The entire process
+            happens in your browser or via secure file upload.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            How secure is Sift Savvy? What happens to my email data?
+            <span class="arrow">▾</span>
+          </button>
+          <div class="faq-answer">
+            We follow the same security standards used by financial and healthcare applications:
+            <ul style="margin:.5rem 0 0 1.5rem;">
+              <li style="margin-bottom:.5rem;"><strong>Read-only access only</strong> — We never send emails or modify your inbox.</li>
+              <li style="margin-bottom:.5rem;"><strong>48-hour data deletion</strong> — All uploaded files are permanently deleted after the audit.</li>
+              <li style="margin-bottom:.5rem;"><strong>JWT authentication &amp; row-level security</strong> — Your data is isolated from other users.</li>
+              <li style="margin-bottom:.5rem;"><strong>Encrypted transmission</strong> — HTTPS and secure storage protocols throughout.</li>
+              <li><strong>No third-party sharing</strong> — Ever.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- TROUBLESHOOTING -->
+        <p style="font-size:.7rem; font-weight:800; letter-spacing:.12em; text-transform:uppercase; color:var(--neutral-500); margin-bottom:.75rem; margin-top:2rem;">Troubleshooting</p>
+
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            How do I troubleshoot common issues?
+            <span class="arrow">▾</span>
+          </button>
+          <div class="faq-answer">
+            Most issues are simple to resolve:
+            <ul style="margin:.5rem 0 0 1.5rem;">
+              <li style="margin-bottom:.5rem;">
+                <strong>File too large?</strong> We handle up to 50 emails per file efficiently.
+                For larger exports, split into multiple files or reduce your date range to 30–60 days.
+              </li>
+              <li style="margin-bottom:.5rem;">
+                <strong>Upload fails?</strong> Ensure your file is .txt format with each email
+                separated by a line of dashes (<code>------</code>). Gmail: drag to desktop.
+                Outlook: save as .txt. Any provider works as long as the format is correct.
+              </li>
+              <li>
+                <strong>No leads found?</strong> Some inboxes genuinely have low volume —
+                but our "Find Money You Missed" feature often surfaces aged opportunities
+                you'd forgotten about. If still no results, email
+                <a href="mailto:support@siftsavvy.com">support@siftsavvy.com</a>.
+              </li>
+            </ul>
+            <p style="margin-top:.75rem;">
+              If you're stuck, email <a href="mailto:support@siftsavvy.com">support@siftsavvy.com</a>.
+              We respond within 24 hours. For urgent audit-related issues: same-day replies.
+            </p>
+          </div>
+        </div>
+
+        <!-- BILLING -->
+        <p style="font-size:.7rem; font-weight:800; letter-spacing:.12em; text-transform:uppercase; color:var(--neutral-500); margin-bottom:.75rem; margin-top:2rem;">Billing &amp; Payment</p>
+
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            What are the pricing plans?
+            <span class="arrow">▾</span>
+          </button>
+          <div class="faq-answer">
+            <table style="width:100%; border-collapse:collapse; font-size:.9rem; margin-top:.5rem;">
+              <thead>
+                <tr style="background:var(--neutral-100);">
+                  <th style="padding:.6rem 1rem; text-align:left; font-weight:700;">Plan</th>
+                  <th style="padding:.6rem 1rem; text-align:left; font-weight:700;">Price</th>
+                  <th style="padding:.6rem 1rem; text-align:left; font-weight:700;">Best For</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="padding:.6rem 1rem; border-top:1px solid var(--neutral-200);"><strong>Done-For-You One Time Inbox Audit</strong></td>
+                  <td style="padding:.6rem 1rem; border-top:1px solid var(--neutral-200); font-weight:800; color:var(--primary);">$497</td>
+                  <td style="padding:.6rem 1rem; border-top:1px solid var(--neutral-200);">A single deep dive to recover missed revenue. If we don't find $2,000+, it's free.</td>
+                </tr>
+                <tr>
+                  <td style="padding:.6rem 1rem; border-top:1px solid var(--neutral-200); background:#f0f9ff;"><strong>Done-For-You Monthly Continuous</strong></td>
+                  <td style="padding:.6rem 1rem; border-top:1px solid var(--neutral-200); background:#f0f9ff; font-weight:800; color:var(--primary);">$99/mo</td>
+                  <td style="padding:.6rem 1rem; border-top:1px solid var(--neutral-200); background:#f0f9ff;">Ongoing monitoring with monthly reports. We watch your inbox so you never miss another deal.</td>
+                </tr>
+              </tbody>
+            </table>
+            <p style="margin-top:.75rem; font-weight:600;">No hidden fees. Cancel anytime. Payment handled via secure Stripe link.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            How do I cancel my monthly subscription?
+            <span class="arrow">▾</span>
+          </button>
+          <div class="faq-answer">
+            Monthly clients can cancel from the dashboard with one click. There are no
+            early-termination fees. If you cancel mid-month, you'll retain access until
+            the end of your current billing period.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            Where can I find additional help?
+            <span class="arrow">▾</span>
+          </button>
+          <div class="faq-answer">
+            <ul style="margin:.5rem 0 0 1.5rem;">
+              <li style="margin-bottom:.5rem;">This FAQ document covers most common questions.</li>
+              <li style="margin-bottom:.5rem;">Our website has a live chat — <strong>Fargo, the AI assistant</strong> — for instant help.</li>
+              <li>Email support is always available at <a href="mailto:support@siftsavvy.com">support@siftsavvy.com</a>. Response time: standard inquiries 24 hours, urgent audit-related issues same-day.</li>
+            </ul>
+          </div>
+        </div>
+
+      </div><!-- /faq-list -->
+    </div>
+  </section>
+
+  <!-- ==================== FINAL CTA ==================== -->
+  <section class="cta-banner">
+    <div class="container">
+      <h2>Stop Leaving Revenue in Your Inbox.</h2>
+      <p>
+        Run the free calculator to see your number. Then request your audit.
+        If we don't find $2,000 in opportunities — it's on us.
+      </p>
+      <div style="display:flex; gap:1rem; justify-content:center; flex-wrap:wrap;">
+        <a href="email-calculator/index.html"         class="btn btn-primary btn-lg">📉 Calculate My Loss</a>
+        <a href="roi-calculator/index.html"           class="btn btn-outline  btn-lg">📈 Calculate Audit ROI</a>
+        <a href="mailto:mark@siftsavvy.com"           class="btn btn-outline  btn-lg">✉ Request Audit</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div>
+          <div class="footer-brand">⚡ Sift<span>Savvy</span></div>
+          <p class="footer-copy">
+            © 2026 Sift Savvy. All rights reserved. Inbox Revenue Recovery as a Service.<br>
+            Research sourced from EMARKETER, EmailAnalytics, Harvard Business Review,
+            Woodpecker, Kickbox, and Validity (2025–2026).
+          </p>
+        </div>
+        <ul class="footer-links">
+          <li><a href="#findings">Research</a></li>
+          <li><a href="#calculators">Calculators</a></li>
+          <li><a href="#how-it-works">How It Works</a></li>
+          <li><a href="#pricing">Pricing</a></li>
+          <li><a href="#faq">FAQ</a></li>
+          <li><a href="mailto:mark@siftsavvy.com">mark@siftsavvy.com</a></li>
+          <li><a href="mailto:support@siftsavvy.com">Support</a></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.querySelectorAll('.faq-question').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        var item = this.closest('.faq-item');
+        var isOpen = item.classList.contains('open');
+        document.querySelectorAll('.faq-item').forEach(function(i) {
+          i.classList.remove('open');
+          i.querySelector('.faq-question').setAttribute('aria-expanded','false');
+        });
+        if (!isOpen) {
+          item.classList.add('open');
+          this.setAttribute('aria-expanded','true');
+        }
+      });
+    });
+  </script>
+</body>
+</html>
